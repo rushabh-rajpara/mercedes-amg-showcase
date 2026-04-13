@@ -1,124 +1,158 @@
-// Motion role: mixed - ui-transition + decorative (refactor next).
+// Motion role: ui-transition.
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import Lottie from 'lottie-react';
-import carFloat from "/public/assets/floatcar.json" // adjust path if needed
+import heroImage from '/public/assets/Cover1.png';
 import { motionDistance, motionDurations, motionFramer } from '../lib/motion';
+
+const heroFontStack =
+  '"Aptos Display", "Aptos", "Segoe UI Variable Display", "Helvetica Neue", "Arial Nova", sans-serif';
 
 const HeroSection = () => {
   return (
     <Box
-      component={motion.div}
-      initial={{ opacity: 0, scale: 1.1 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={motionFramer.heroReveal}
       sx={{
         height: '100vh',
-        backgroundImage: 'url(../public/assets/Cover.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         position: 'relative',
         overflow: 'hidden',
+        backgroundColor: '#000',
       }}
     >
-      {/* Overlay */}
       <Box
+        component={motion.img}
+        src={heroImage}
+        alt="Mercedes-AMG GT hero"
+        initial={{ opacity: 0.94, scale: 1.045 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ ...motionFramer.heroReveal, duration: motionDurations.hero * 1.5 }}
         sx={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          height: '100%',
+          inset: 0,
           width: '100%',
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3))',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: { xs: '64% center', md: 'center center' },
+          willChange: 'transform',
+        }}
+      />
+
+      <Box
+        component={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: motionDurations.hero }}
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.34) 30%, rgba(0,0,0,0.10) 54%, rgba(0,0,0,0.86) 100%)',
           zIndex: 1,
         }}
       />
 
-      {/* Content */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'radial-gradient(circle at 50% 42%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.12) 42%, rgba(0,0,0,0.58) 100%)',
+          zIndex: 2,
+        }}
+      />
+
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(90deg, rgba(0,0,0,0.64) 0%, rgba(0,0,0,0.16) 36%, rgba(0,0,0,0.18) 64%, rgba(0,0,0,0.68) 100%)',
+          zIndex: 3,
+        }}
+      />
+
       <Box
         component={motion.div}
         initial={{ opacity: 0, y: motionDistance.small }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ ...motionFramer.heroContent, delay: motionDurations.ui }}
+        transition={{ ...motionFramer.heroContent, delay: motionDurations.ui * 1.15, duration: motionDurations.hero }}
         sx={{
           position: 'relative',
-          bottom: 50,
-          zIndex: 2,
+          zIndex: 4,
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          px: 3,
-          textAlign: 'center',
-          
+          justifyContent: { xs: 'flex-start', md: 'flex-start' },
+          alignItems: { xs: 'flex-start', md: 'flex-start' },
+          textAlign: 'left',
+          px: { xs: 3, md: 6 },
+          pt: { xs: '18vh', md: '15vh' },
+          fontFamily: heroFontStack,
         }}
       >
         <Typography
-          variant="h2"
-          sx={{ color: '#fff', fontWeight: 700 }}
-          gutterBottom
+          variant="overline"
+          sx={{
+            color: 'rgba(233,233,233,0.52)',
+            fontWeight: 450,
+            letterSpacing: '0.38em',
+            textTransform: 'uppercase',
+            fontSize: {
+              xs: '0.56rem',
+              md: '0.64rem',
+            },
+            mb: { xs: 1.75, md: 2.25 },
+            pl: '0.12em',
+            fontFamily: heroFontStack,
+          }}
         >
-          Mercedes-AMG GT
+          AMG Performance
+        </Typography>
+
+        <Typography
+          variant="h1"
+          component="h1"
+          sx={{
+            color: 'rgba(240,240,240,0.94)',
+            fontWeight: 620,
+            letterSpacing: '-0.018em',
+            lineHeight: 0.9,
+            fontSize: {
+              xs: 'clamp(1.9rem, 7vw, 2.65rem)',
+              md: 'clamp(3rem, 4.2vw, 4rem)',
+            },
+            maxWidth: { xs: '7.5ch', md: 'none' },
+            textWrap: 'balance',
+            fontFamily: heroFontStack,
+            textRendering: 'geometricPrecision',
+          }}
+        >
+          <Box component="span" sx={{ display: { xs: 'block', md: 'inline' }, whiteSpace: 'nowrap' }}>
+            Mercedes-AMG
+          </Box>{' '}
+          <Box component="span" sx={{ display: { xs: 'block', md: 'inline' }, whiteSpace: 'nowrap' }}>
+            GT
+          </Box>
         </Typography>
 
         <Typography
           variant="h6"
-          sx={{ color: '#ccc', mb: 3 }}
+          sx={{
+            mt: { xs: 3.25, md: 3.75 },
+            color: 'rgba(219,219,219,0.62)',
+            fontWeight: 380,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            fontSize: {
+              xs: '0.66rem',
+              md: '0.78rem',
+            },
+            pl: '0.18em',
+            lineHeight: 1.45,
+            fontFamily: heroFontStack,
+          }}
         >
-          Performance. Redefined.
+          Engineered for Dominance.
         </Typography>
-
-        
-        <Box
-        sx={{
-          position: 'absolute',
-          bottom: -20,
-          right: 30,
-          width: 200,
-          transform: 'scaleX(-1)',
-          zIndex: 3,
-        }}
-      >
-        <Lottie animationData={carFloat} loop={false} />
-      </Box>
-
-      {/* Typewriter Exhaust Text */}
-      <Typography
-        variant="body2"
-        sx={{
-          position: 'absolute',
-          bottom: -20,
-          right: 230,
-          color: '#888888',
-          fontFamily: 'monospace',
-          fontSize: '0.9rem',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          width: '0ch',
-          animation: 'typing 3s steps(20) forwards, blink 0.7s step-end infinite',
-          zIndex: 3,
-        }}
-      >
-        Scroll up to reveal
-      </Typography>
-
-      {/* Typewriter Animations */}
-      <style>
-        {`
-          @keyframes typing {
-            from { width: 0 }
-            to { width: 20ch }
-          }
-
-          @keyframes blink {
-            0%, 100% { border-color: transparent }
-            50% { border-color: #ccc }
-          }
-        `}
-      </style>
-
       </Box>
     </Box>
   );
