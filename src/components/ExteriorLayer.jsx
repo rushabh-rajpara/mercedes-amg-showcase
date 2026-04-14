@@ -1,13 +1,13 @@
 // Motion role: static/presentational.
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import exteriorHero from '/public/assets/Cover.jpg';
+import exteriorHero from '/public/assets/Exterior.png';
 
 const ExteriorLayer = () => {
   return (
     <Box
       id="exterior"
-      aria-label="Exterior Showcase Layer"
+      aria-label="Exterior Reveal Layer"
       sx={{
         height: '100vh',
         width: '100%',
@@ -17,94 +17,89 @@ const ExteriorLayer = () => {
       }}
     >
       <Box
-        component="img"
-        src={exteriorHero}
-        alt="Mercedes-AMG GT exterior"
+        className="exterior-image-shell"
         sx={{
+          position: 'absolute',
+          inset: 0,
+          overflow: 'hidden',
+        }}
+      >
+      <Box
+        component="img"
+        className="exterior-image"
+        src={exteriorHero}
+        alt="White Mercedes-AMG GT front view in a tunnel"
+        sx={{
+          position: 'absolute',
+          inset: 0,
           width: '100%',
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center center',
-          filter: 'brightness(0.5) saturate(0.9)',
+          transformOrigin: 'center center',
+          filter: 'brightness(0.38) contrast(0.76) saturate(0.84)',
         }}
       />
+      </Box>
 
       <Box
+        className="exterior-shadow-scrim"
         sx={{
           position: 'absolute',
           inset: 0,
-          background:
-            'linear-gradient(180deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 34%, rgba(0,0,0,0.22) 58%, rgba(0,0,0,0.82) 100%)',
+          background: 'rgba(0,0,0,0.42)',
           zIndex: 1,
         }}
       />
 
       <Box
+        className="exterior-overlay-primary"
         sx={{
           position: 'absolute',
           inset: 0,
           background:
-            'linear-gradient(90deg, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.08) 48%, rgba(0,0,0,0.55) 100%)',
+            'linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.46) 34%, rgba(0,0,0,0.18) 58%, rgba(0,0,0,0.92) 100%)',
           zIndex: 2,
+          opacity: 1,
         }}
       />
 
       <Box
+        className="exterior-overlay-vignette"
         sx={{
           position: 'absolute',
-          top: { xs: 28, md: 42 },
-          left: { xs: 24, md: 48 },
-          right: { xs: 24, md: 'auto' },
+          inset: 0,
+          background:
+            'radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.16) 44%, rgba(0,0,0,0.64) 100%)',
           zIndex: 3,
+          opacity: 1,
         }}
-      >
-        <Typography
-          variant="overline"
-          sx={{
-            color: 'rgba(255,255,255,0.72)',
-            letterSpacing: '0.28em',
-            textTransform: 'uppercase',
-          }}
-        >
-          Exterior Design
-        </Typography>
-      </Box>
+      />
 
       <Box
+        className="exterior-copy"
         sx={{
           position: 'absolute',
-          left: { xs: 24, md: 48 },
-          right: { xs: 24, md: 'auto' },
-          bottom: { xs: 36, md: 52 },
-          zIndex: 3,
-          maxWidth: { xs: '100%', md: 520 },
+          left: { xs: 24, md: 52 },
+          bottom: { xs: 42, md: 56 },
+          zIndex: 4,
+          maxWidth: { xs: '78%', md: 340 },
+          opacity: 0,
           textAlign: 'left',
+          transform: 'translateY(24px)',
         }}
       >
-        <Typography
-          variant="h2"
-          sx={{
-            color: '#fff',
-            fontWeight: 700,
-            lineHeight: 0.95,
-            letterSpacing: '-0.03em',
-            mb: 1.5,
-          }}
-        >
-          Sculpted
-          <br />
-          Presence
-        </Typography>
-
         <Typography
           variant="body2"
           sx={{
-            color: 'rgba(255,255,255,0.74)',
+            color: 'rgba(240,240,240,0.76)',
+            fontWeight: 500,
+            letterSpacing: '0.16em',
             textTransform: 'uppercase',
-            letterSpacing: '0.2em',
+            fontSize: { xs: '0.78rem', md: '0.88rem' },
           }}
         >
-          Long hood • wide stance • unmistakable AMG silhouette
+          Precision in Every Line.
         </Typography>
       </Box>
     </Box>
